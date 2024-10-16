@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		27B76C382CC02230007DC752 /* StarSaverView.h in Headers */ = {isa = PBXBuildFile; fileRef = 27B76C372CC02230007DC752 /* StarSaverView.h */; };
 		27B76C3A2CC02230007DC752 /* StarSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B76C392CC02230007DC752 /* StarSaverView.m */; };
+		27B76C442CC022FE007DC752 /* star1.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C432CC022FE007DC752 /* star1.png */; };
+		27B76C4A2CC0236C007DC752 /* star3.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C462CC0236C007DC752 /* star3.png */; };
+		27B76C4B2CC0236C007DC752 /* star4.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C472CC0236C007DC752 /* star4.png */; };
+		27B76C4C2CC0236C007DC752 /* star2.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C482CC0236C007DC752 /* star2.png */; };
+		27B76C4D2CC0236C007DC752 /* star5.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C492CC0236C007DC752 /* star5.png */; };
+		27B76C632CC03D79007DC752 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C622CC03D79007DC752 /* config.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		27B76C342CC02230007DC752 /* StarSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
-		27B76C372CC02230007DC752 /* StarSaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarSaverView.h; sourceTree = "<group>"; };
 		27B76C392CC02230007DC752 /* StarSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StarSaverView.m; sourceTree = "<group>"; };
 		27B76C3B2CC02230007DC752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27B76C432CC022FE007DC752 /* star1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star1.png; sourceTree = "<group>"; };
+		27B76C462CC0236C007DC752 /* star3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star3.png; sourceTree = "<group>"; };
+		27B76C472CC0236C007DC752 /* star4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star4.png; sourceTree = "<group>"; };
+		27B76C482CC0236C007DC752 /* star2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star2.png; sourceTree = "<group>"; };
+		27B76C492CC0236C007DC752 /* star5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star5.png; sourceTree = "<group>"; };
+		27B76C622CC03D79007DC752 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		27B76C652CC03F92007DC752 /* StarSaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarSaverView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,11 +59,25 @@
 		27B76C362CC02230007DC752 /* StarSaver */ = {
 			isa = PBXGroup;
 			children = (
-				27B76C372CC02230007DC752 /* StarSaverView.h */,
-				27B76C392CC02230007DC752 /* StarSaverView.m */,
+				27B76C4F2CC0237E007DC752 /* Resources */,
 				27B76C3B2CC02230007DC752 /* Info.plist */,
+				27B76C392CC02230007DC752 /* StarSaverView.m */,
+				27B76C652CC03F92007DC752 /* StarSaverView.h */,
 			);
 			path = StarSaver;
+			sourceTree = "<group>";
+		};
+		27B76C4F2CC0237E007DC752 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				27B76C432CC022FE007DC752 /* star1.png */,
+				27B76C482CC0236C007DC752 /* star2.png */,
+				27B76C462CC0236C007DC752 /* star3.png */,
+				27B76C472CC0236C007DC752 /* star4.png */,
+				27B76C492CC0236C007DC752 /* star5.png */,
+				27B76C622CC03D79007DC752 /* config.json */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -62,7 +87,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27B76C382CC02230007DC752 /* StarSaverView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +147,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B76C4C2CC0236C007DC752 /* star2.png in Resources */,
+				27B76C442CC022FE007DC752 /* star1.png in Resources */,
+				27B76C4B2CC0236C007DC752 /* star4.png in Resources */,
+				27B76C4D2CC0236C007DC752 /* star5.png in Resources */,
+				27B76C4A2CC0236C007DC752 /* star3.png in Resources */,
+				27B76C632CC03D79007DC752 /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
