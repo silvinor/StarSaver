@@ -47,6 +47,7 @@
 				27B76C352CC02230007DC752 /* Products */,
 			);
 			sourceTree = "<group>";
+			wrapsLines = 0;
 		};
 		27B76C352CC02230007DC752 /* Products */ = {
 			isa = PBXGroup;
@@ -118,6 +119,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1240;
+				ORGANIZATIONNAME = com.vinorodrigues;
 				TargetAttributes = {
 					27B76C332CC02230007DC752 = {
 						CreatedOnToolsVersion = 12.4;
@@ -284,12 +286,16 @@
 		27B76C3F2CC02230007DC752 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vinorodrigues.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Debug;
@@ -297,12 +303,16 @@
 		27B76C402CC02230007DC752 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vinorodrigues.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Release;
