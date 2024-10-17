@@ -135,21 +135,23 @@
   
   // ----- Initialise the Stars -----
   
-  self.starHead = 0;  // Start the star "buffer" at the begining
+  // self.starHead = 0;  // Start the star "buffer" at the begining
+  self.starHead = floor( self.numberOfStars / 2);  // Initially show 1/2 the stars ;)
 
   // Initialize the stars array
   self.stars = [NSMutableArray array];
+ 
 
   // Build the star array with initial random positions
   for (NSInteger i = 0; i < self.numberOfStars; i++) {
     Star *star = [[Star alloc] init];
-//    if ((true)) {  // set to `true` if you want the stars to gradually apear from an empty screen
+    if (i >= self.starHead) {
       // star.position = NSMakePoint(0, 0);
       star.state = StarStateGone;
-//    } else {
-//      star.position = self.randomPosition;
-//      star.state = StarStateNormal;
-//    }
+    } else {
+      star.position = self.randomPosition;
+      star.state = StarStateNormal;
+    }
     [self.stars addObject:star];
   }
   

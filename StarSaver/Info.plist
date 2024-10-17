@@ -20,5 +20,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string>StarSaverView</string>
+	<key>ScreenSaverModule</key>
+	<dict>
+		<key>MainClassName</key>
+		<string>StarSaverView</string>
+	</dict>
 </dict>
 </plist>
