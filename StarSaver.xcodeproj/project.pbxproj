@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		273FCE9E2CC1960E0042154F /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 273FCE9D2CC1960E0042154F /* Preview.png */; };
+		273FCE9E2CC1960E0042154F /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 273FCE9D2CC1960E0042154F /* thumbnail.png */; };
 		27B76C3A2CC02230007DC752 /* StarSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B76C392CC02230007DC752 /* StarSaverView.m */; };
 		27B76C442CC022FE007DC752 /* star1.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C432CC022FE007DC752 /* star1.png */; };
 		27B76C4A2CC0236C007DC752 /* star3.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C462CC0236C007DC752 /* star3.png */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		273FCE9D2CC1960E0042154F /* Preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preview.png; sourceTree = "<group>"; };
+		273FCE9D2CC1960E0042154F /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		27B76C342CC02230007DC752 /* StarSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B76C392CC02230007DC752 /* StarSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StarSaverView.m; sourceTree = "<group>"; wrapsLines = 0; };
 		27B76C3B2CC02230007DC752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		273FCEA02CC1961F0042154F /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				273FCE9D2CC1960E0042154F /* Preview.png */,
+				273FCE9D2CC1960E0042154F /* thumbnail.png */,
 				27B76C432CC022FE007DC752 /* star1.png */,
 				27B76C482CC0236C007DC752 /* star2.png */,
 				27B76C462CC0236C007DC752 /* star3.png */,
@@ -154,7 +154,7 @@
 				27B76C4C2CC0236C007DC752 /* star2.png in Resources */,
 				27B76C442CC022FE007DC752 /* star1.png in Resources */,
 				27B76C4B2CC0236C007DC752 /* star4.png in Resources */,
-				273FCE9E2CC1960E0042154F /* Preview.png in Resources */,
+				273FCE9E2CC1960E0042154F /* thumbnail.png in Resources */,
 				27B76C4D2CC0236C007DC752 /* star5.png in Resources */,
 				27B76C4A2CC0236C007DC752 /* star3.png in Resources */,
 				27B76C632CC03D79007DC752 /* config.json in Resources */,
