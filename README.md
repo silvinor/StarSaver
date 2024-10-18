@@ -36,6 +36,8 @@ It has been a learning experience and a joy to create!
 
 The `v0.2` code was rewritten, by hand.  The Chatgipetee code logic just didn't seem efficient to my way of logic.  It works, so does mine - there is no "winner", just different.
 
+And from there we refine ... see the [CHANGELOG](CHANGELOG.md).
+
 
 &nbsp;<br>&nbsp;
 

@@ -4,9 +4,13 @@
 #import <ScreenSaver/ScreenSaver.h>
 #import <Cocoa/Cocoa.h>
 
+//#ifdef DEBUG
+//  #import "DebugLogView.h"  // Import the new DebugLogView
+//#endif
+
 // size of stars as in resouce files  // TODO : Refactor names
-#define BMX 14
-#define BMY 14
+#define STAR_CELL_WIDTH 14
+#define STAR_CELL_HEIGHT 14
 
 typedef NS_ENUM(NSInteger, StarState) {
   StarStateGone,
@@ -32,10 +36,16 @@ typedef NS_ENUM(NSInteger, StarState) {
 
   @property (nonatomic, strong) NSTimer *timer;             // Timer to control star movement and animation
 
+  //#ifdef DEBUG
+  //  @property (nonatomic, strong) DebugLogView *debugLog;  // Use DebugLogView to handle the debug display
+  //#endif
+
+  - (void)animateOneFrame;
   - (NSPoint)randomPosition;
   - (void)internalInit;
   - (void)drawStarAt:(NSInteger)index;
   - (void)timerTick;
+
 @end
 
 #endif /* StarSaverView_h */

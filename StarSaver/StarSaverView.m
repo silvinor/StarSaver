@@ -9,6 +9,7 @@
 
 #import "StarSaverView.h"
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 #import <math.h>
 
 @implementation Star
@@ -69,25 +70,28 @@
   }
 
   // Set default values if config is invalid
-  if (self.numberOfStars <= 0) {
-    self.numberOfStars = 100;  // Default to 100 stars
+  if ((self.numberOfStars <= 0) || (self.numberOfStars > 1000)) {  // 1 to 1000
+    // Default to 1% of the cell count
+    // On Legacy iMac 27" that's `((2560/14)*(1440/14))*0.01` = `188`
+    // Have not tested this on a Retina display :(
+    self.numberOfStars = floor(((self.bounds.size.width / STAR_CELL_WIDTH) * (self.bounds.size.height / STAR_CELL_HEIGHT)) * 0.01);
   }
-  if (self.novaProbability <= 0) {
-    self.novaProbability = 40; // Default Nova probability to 1 in 40
+  if ((self.novaProbability < 0) || (self.novaProbability > 1000)) {  // 0 to 1000, NB: 0 = always
+    // Default Nova probability to 1 in 40
+    self.novaProbability = 25;
   }
-  if (self.animationTiming <= 0) {
-    self.animationTiming = 250; // Default animation timing to 250ms
+  if ((self.animationTiming < 60) || (self.animationTiming > 60000)) {  // 1/60 s to 1 min
+    // Default animation timing set so that each star lives for aprox. 1 m
+    self.animationTiming = floor((1000 * 60) / (self.numberOfStars / 2));
   }
-  
-  // TODO : Adjust for sane min / max values
 }
 
 // ------------------------------
 // Generate random co-ordinates
 // ------------------------------
 - (NSPoint)randomPosition {
-  NSInteger cols = floor( self.bounds.size.width / BMX );
-  NSInteger rows = floor( self.bounds.size.height / BMY );
+  NSInteger cols = floor( self.bounds.size.width / STAR_CELL_WIDTH );
+  NSInteger rows = floor( self.bounds.size.height / STAR_CELL_HEIGHT );
 
   CGFloat x = SSRandomIntBetween(0, (int)cols);
   CGFloat y = SSRandomIntBetween(0, (int)rows);
@@ -136,11 +140,10 @@
   // ----- Initialise the Stars -----
   
   // self.starHead = 0;  // Start the star "buffer" at the begining
-  self.starHead = floor( self.numberOfStars / 2);  // Initially show 1/2 the stars ;)
+  self.starHead = floor( self.numberOfStars / 4);  // Initially show 1/4 the stars ;)  OG started at 0, but...
 
   // Initialize the stars array
   self.stars = [NSMutableArray array];
- 
 
   // Build the star array with initial random positions
   for (NSInteger i = 0; i < self.numberOfStars; i++) {
@@ -154,9 +157,10 @@
     }
     [self.stars addObject:star];
   }
-  
-  NSTimeInterval interval = self.animationTiming / 1000.0;
-  [self setAnimationTimeInterval:interval];
+
+  //  // Needs `animateOneFrame`
+  //  NSTimeInterval interval = self.animationTiming / 1000.0;  // settings is in ms
+  //  [self setAnimationTimeInterval:interval];
 }
 
 // ------------------------------
@@ -171,7 +175,7 @@
                                               selector:@selector(timerTick)
                                               userInfo:nil
                                                repeats:YES];
-  
+
   [self setNeedsDisplay:YES];  // redraw the whole screen
 }
 
@@ -212,39 +216,35 @@
       starImage = nil;
       break;
   }
-  
+
   // Draw the star
   if (starImage != nil) {
-    NSRect starRect = NSMakeRect(star.position.x * BMX, star.position.y * BMY, BMX, BMY);
-    [starImage drawInRect:starRect];
+    [starImage drawInRect:NSMakeRect(star.position.x * STAR_CELL_WIDTH,
+                                     star.position.y * STAR_CELL_HEIGHT,
+                                     STAR_CELL_WIDTH,
+                                     STAR_CELL_HEIGHT)];
   }
 }
 
-/*
 // ------------------------------
-// Erase the star potition
-// ------------------------------
-- (void)eraseCellAt:(NSPoint)pos {
-  // TODO: Check if another star shares the position
-  [[NSColor redColor] setFill];  // TODO: FIXME: blackColor
-  NSRect rect = NSMakeRect(pos.x * BMX, pos.y * BMY, BMX, BMY);
-  NSRectFill(rect);
-}
-*/
-
-// ------------------------------
-// Draw the initial state
+// Draw area needed
 // ------------------------------
 - (void)drawRect:(NSRect)rect {
   [super drawRect:rect];
-
+  
   // Fill the background with black
   [[NSColor blackColor] setFill];
-  NSRectFill(rect);  // Fill the entire screen with black
-  
-  // Draw all the stars at the random positions
+  NSRectFill(rect);  // Fill the rect with black
+
+  // Draw the stars if needed
   for (NSInteger i = 0; i < self.numberOfStars; i++) {
-    [self drawStarAt:i];
+    Star *star = [self.stars objectAtIndex:(i)];
+    if (NSContainsRect(rect, NSMakeRect(star.position.x * STAR_CELL_WIDTH,
+                                        star.position.y * STAR_CELL_HEIGHT,
+                                        STAR_CELL_WIDTH,
+                                        STAR_CELL_HEIGHT))) {
+      [self drawStarAt:i];
+    }
   }
 }
 
@@ -279,6 +279,14 @@
       newState = StarStateGone;
       break;
     default: // StarSateGone
+      
+      // Invalidate old position
+      [self setNeedsDisplayInRect:NSMakeRect(star.position.x * STAR_CELL_WIDTH,
+                                             star.position.y * STAR_CELL_HEIGHT,
+                                             STAR_CELL_WIDTH,
+                                             STAR_CELL_HEIGHT)];
+
+      // New position
       star.position = self.randomPosition;  // new position
   
       // inc the header, i.e. move on to the next star
@@ -291,14 +299,19 @@
 
   star.state = newState;
 
-  // Force the view to redraw
-  [self setNeedsDisplay:YES];
+  // Force the star area to redraw
+  [self setNeedsDisplayInRect:NSMakeRect(star.position.x * STAR_CELL_WIDTH,
+                                         star.position.y * STAR_CELL_HEIGHT,
+                                         STAR_CELL_WIDTH,
+                                         STAR_CELL_HEIGHT)];
 }
 
 //// ------------------------------
-//// Gets called repeatedly to draw states on timer ticks
+//// Gets called repeatedly to draw states on timer ticks 
+//// when used with `setAnimationTimeInterval`
 //// ------------------------------
 //- (void)animateOneFrame {
+//  [super animateOneFrame];
 //  [self timerTick];
 //  return;
 //}
