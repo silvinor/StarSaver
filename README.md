@@ -1,6 +1,6 @@
-# Commander Starry Night Screen Saver
+# Commander Starry Night screen saver
 
-> A (MacOS) clone of the old Norton Commander 4 Saver
+> A (MacOS) clone of the old Norton Commander 3 screen saver
 
 This project is a custom macOS screen saver that displays animated stars. The stars are customisable through a `config.json` file, which allows users to set font styles, animation speeds, and more.
 
