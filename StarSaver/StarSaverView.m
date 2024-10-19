@@ -317,14 +317,12 @@
 //}
 
 // ------------------------------
-// TODO: Later
 // ------------------------------
 - (BOOL)hasConfigureSheet {
   return NO;
 }
 
 // ------------------------------
-// TODO: Later
 // ------------------------------
 - (NSWindow*)configureSheet {
   return nil;

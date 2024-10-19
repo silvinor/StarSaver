@@ -4,10 +4,6 @@
 #import <ScreenSaver/ScreenSaver.h>
 #import <Cocoa/Cocoa.h>
 
-//#ifdef DEBUG
-//  #import "DebugLogView.h"  // Import the new DebugLogView
-//#endif
-
 // size of stars as in resouce files  // TODO : Refactor names
 #define STAR_CELL_WIDTH 14
 #define STAR_CELL_HEIGHT 14
@@ -29,18 +25,13 @@ typedef NS_ENUM(NSInteger, StarState) {
 @interface StarSaverView : ScreenSaverView
   @property (nonatomic, strong) NSArray *starImages;        // Array to hold star images (star1.png to star5.png)
   @property (nonatomic, strong) NSMutableArray *stars;      // Array to hold stars (Star objects)
-  @property (nonatomic, assign) NSInteger numberOfStars;    // Number of stars
+  @property (nonatomic, strong) NSTimer *timer;             // Timer to control star movement and animation
   @property (nonatomic, assign) NSInteger starHead;         // Current star being processed
+
+  @property (nonatomic, assign) NSInteger numberOfStars;    // Number of stars
   @property (nonatomic, assign) NSInteger novaProbability;  // Probability for Nova (1 in X chance)
   @property (nonatomic, assign) NSInteger animationTiming;  // Animation timing in milliseconds
 
-  @property (nonatomic, strong) NSTimer *timer;             // Timer to control star movement and animation
-
-  //#ifdef DEBUG
-  //  @property (nonatomic, strong) DebugLogView *debugLog;  // Use DebugLogView to handle the debug display
-  //#endif
-
-  - (void)animateOneFrame;
   - (NSPoint)randomPosition;
   - (void)internalInit;
   - (void)drawStarAt:(NSInteger)index;

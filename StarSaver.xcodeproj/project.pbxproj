@@ -18,8 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2708CD202CC21FD80046920C /* __DebugLogView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = __DebugLogView.h; sourceTree = "<group>"; };
-		2708CD232CC2207E0046920C /* __DebugLogView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = __DebugLogView.m; sourceTree = "<group>"; wrapsLines = 0; };
 		273FCE9D2CC1960E0042154F /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		27B76C342CC02230007DC752 /* StarSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B76C392CC02230007DC752 /* StarSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StarSaverView.m; sourceTree = "<group>"; wrapsLines = 0; };
@@ -79,8 +77,6 @@
 			children = (
 				273FCEA02CC1961F0042154F /* Assets */,
 				27B76C3B2CC02230007DC752 /* Info.plist */,
-				2708CD202CC21FD80046920C /* __DebugLogView.h */,
-				2708CD232CC2207E0046920C /* __DebugLogView.m */,
 				27B76C652CC03F92007DC752 /* StarSaverView.h */,
 				27B76C392CC02230007DC752 /* StarSaverView.m */,
 			);

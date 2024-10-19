@@ -4,6 +4,8 @@
 
 This project is a custom macOS screen saver that displays animated stars. The stars are customisable through a `config.json` file, which allows users to set font styles, animation speeds, and more.
 
+<center><img src="docs/screenshot.jpg" style="border-radius:14px"></center>
+
 ## Features
 
 - **Animated Stars**: The stars *"move"* around the screen with a chance to go *"Nova"*.
@@ -34,7 +36,7 @@ The `v0.1` code was entirely written by ChatGPT, an AI developed by OpenAI, with
 
 It has been a learning experience and a joy to create!
 
-The `v0.2` code was rewritten, by hand.  The Chatgipetee code logic just didn't seem efficient to my way of logic.  It works, so does mine - there is no "winner", just different.
+The `v0.2` code was rewritten, by hand.  The Chatpardy code logic just didn't seem efficient to my way of logic.  It works, so does mine - there is no "winner", just different.
 
 And from there we refine ... see the [CHANGELOG](CHANGELOG.md).
 
