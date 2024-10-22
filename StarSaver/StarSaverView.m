@@ -18,10 +18,11 @@
 @interface StarSaverView ()
 
   // Private vars
-  @property (nonatomic, assign) CGFloat width;              // Width of screen at `init`
-  @property (nonatomic, assign) CGFloat height;             // Height of screen at `init`
-  @property (nonatomic, assign) NSInteger cols;             // Width / {star resources width}
-  @property (nonatomic, assign) NSInteger rows;             // Height / {star resources height}
+  @property (nonatomic, assign) CGFloat width;   // Width of screen at `init`
+  @property (nonatomic, assign) CGFloat height;  // Height of screen at `init`
+  @property (nonatomic, assign) NSInteger cols;  // Width / {star resources width}
+  @property (nonatomic, assign) NSInteger rows;  // Height / {star resources height}
+  @property (nonatomic, assign) BOOL doOffsets;  // To offset or not
 
   // Private methods
   - (NSPoint)randomPosition;
@@ -117,7 +118,11 @@
     } else {
       star.state = StarStateNormal;
       star.position = self.randomPosition;
-      star.offset = self.randomOffset;
+      if (self.doOffsets) {
+        star.offset = self.randomOffset;
+      } else {
+        star.offset = NSMakePoint(0, 0);
+      }
     }
     [self.stars addObject:star];
   }
@@ -176,6 +181,7 @@
     // Default animation timing set so that each star lives for aprox. 1 m
     self.animationTiming = floor((1000 * 60) / (self.numberOfStars / 2));
   }
+  self.doOffsets = SSRandomIntBetween(0, 1) == 0;  // toss a coin :)
 }
 
 // ==================================================
@@ -292,6 +298,18 @@
   }
 }
 
+// ------------------------------
+// Gets called repeatedly to draw states on timer ticks
+// when used with `setAnimationTimeInterval`
+// ------------------------------
+- (void)animateOneFrame {
+  [super animateOneFrame];
+  if (self.isRunning) {
+    [self timerTick];
+  }
+  return;
+}
+
 // ---------------------------------
 // Abstracting Timer Ticks here
 // ---------------------------------
@@ -329,7 +347,9 @@
 
       // New position
       star.position = self.randomPosition;  // new position
-      star.offset = self.randomOffset;  // new offset
+      if (self.doOffsets) {
+        star.offset = self.randomOffset;  // new offset
+      }
   
       // inc the header, i.e. move on to the next star
       self.starHead++;
@@ -343,18 +363,6 @@
 
   // Force the star area to redraw
   [self setNeedsDisplayInRect:[self getStarRect:star]];
-}
-
-// ------------------------------
-// Gets called repeatedly to draw states on timer ticks
-// when used with `setAnimationTimeInterval`
-// ------------------------------
-- (void)animateOneFrame {
-  [super animateOneFrame];
-  if (self.isRunning) {
-    [self timerTick];
-  }
-  return;
 }
 
 // ==================================================
