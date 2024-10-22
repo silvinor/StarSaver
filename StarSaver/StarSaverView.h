@@ -26,8 +26,8 @@ typedef NS_ENUM(NSInteger, StarState) {
 @interface StarSaverView : ScreenSaverView
   @property (nonatomic, strong) NSArray *starImages;        // Array to hold star images (star1.png to star5.png)
   @property (nonatomic, strong) NSMutableArray *stars;      // Array to hold stars (Star objects)
-  @property (nonatomic, strong) NSTimer *timer;             // Timer to control star movement and animation
   @property (nonatomic, assign) NSInteger starHead;         // Current star being processed
+  @property (nonatomic, assign) BOOL isRunning;             // Controls animation
 
   @property (nonatomic, assign) NSInteger numberOfStars;    // Number of stars
   @property (nonatomic, assign) NSInteger novaProbability;  // Probability for Nova (1 in X chance)

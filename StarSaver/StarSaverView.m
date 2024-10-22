@@ -16,6 +16,7 @@
 @end
 
 @interface StarSaverView ()
+
   // Private vars
   @property (nonatomic, assign) CGFloat width;              // Width of screen at `init`
   @property (nonatomic, assign) CGFloat height;             // Height of screen at `init`
@@ -61,6 +62,8 @@
 // Consolidated initialisation method
 // ------------------------------
 - (void)internalInit {
+  self.isRunning = false;
+  
   // ----- Initialize RandomSeed -----
   // Use the current time to set a unique seed
   srand((unsigned int)time(NULL));  // used by `rand()`
@@ -119,9 +122,9 @@
     [self.stars addObject:star];
   }
 
-  //  // Needs `animateOneFrame`
-  //  NSTimeInterval interval = self.animationTiming / 1000.0;  // settings is in ms
-  //  [self setAnimationTimeInterval:interval];
+  // Needs `animateOneFrame`
+  NSTimeInterval interval = self.animationTiming / 1000.0;  // settings is in ms
+  [self setAnimationTimeInterval:interval];
 }
 
 // ==================================================
@@ -259,25 +262,15 @@
 - (void)startAnimation {
   [super startAnimation];
   
-  // Create a timer that fires {every X} and calls the 'timerTick' method
-
-  NSTimeInterval interval = self.animationTiming / 1000.0;
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:interval
-                                                target:self
-                                              selector:@selector(timerTick)
-                                              userInfo:nil
-                                               repeats:YES];
-
+  self.isRunning = true;
   [self setNeedsDisplay:YES];  // redraw the whole screen
 }
 
 // ------------------------------
 - (void)stopAnimation {
   [super stopAnimation];
-
-  // Invalidate the timer when stopping the screen saver
-  [self.timer invalidate];
-  self.timer = nil;
+  
+  self.isRunning = false;
 }
 
 // ------------------------------
@@ -352,15 +345,17 @@
   [self setNeedsDisplayInRect:[self getStarRect:star]];
 }
 
-//// ------------------------------
-//// Gets called repeatedly to draw states on timer ticks 
-//// when used with `setAnimationTimeInterval`
-//// ------------------------------
-//- (void)animateOneFrame {
-//  [super animateOneFrame];
-//  [self timerTick];
-//  return;
-//}
+// ------------------------------
+// Gets called repeatedly to draw states on timer ticks
+// when used with `setAnimationTimeInterval`
+// ------------------------------
+- (void)animateOneFrame {
+  [super animateOneFrame];
+  if (self.isRunning) {
+    [self timerTick];
+  }
+  return;
+}
 
 // ==================================================
 #pragma mark - Configuration Sheet Methods
