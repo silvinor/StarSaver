@@ -4,15 +4,17 @@
 
 This project is a custom macOS screen saver that displays animated stars. The stars are customisable through a `config.json` file, which allows users to set font styles, animation speeds, and more.
 
-<center><img src="docs/screenshot.jpg" style="border-radius:14px"></center>
+<center><img src="docs/screenshot.png"></center>
 
 ## Features
 
-- **Animated Stars**: The stars *"move"* around the screen with a chance to go *"Nova"*.
+- **Animated Stars**: The stars *"die"* (with a chance to go *"Nova"*), and new ones are *"born"* around the screen.
+
+This screen saver was designed to be as unintuitive as possible.  "Animation" is slow and steady, specifically designed not not be a source of attention, yet subtle enough to indicate that the Mac is alive.
 
 ## Configuration
 
-The screen saver can be configured by modifying the `config.json` file. Here's an example of what you can customize:
+The screen saver can be configured [in Xcode, before compile] by modifying the `config.json` file. Here's an example of what you can customize:
 
 ```json
 {
@@ -21,6 +23,15 @@ The screen saver can be configured by modifying the `config.json` file. Here's a
   "animationTiming": 250
 }
 ```
+
+Default settings are calculated at 1% [of screen resolution] stars, and timing so that each star lives for approximately 1 minute.  Probability of "Nova" is 1 in 25.
+
+## Installing
+
+The package is not signed - so if you want it you will need to compile it from source using Xcode.
+
+Once you've compiled it - copy the `StarSaver.saver` file to the `~/Library/Screen\ Savers/` folder.  It should then appear in the System Preferences.
+
 
 ## License
 

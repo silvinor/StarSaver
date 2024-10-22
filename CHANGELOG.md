@@ -7,21 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-<!--
-## [Unreleased]
-
-### Added
-
-- ?
+## [0.4.0] - 2024-10-21
 
 ### Changed
 
-- ?
-
-### Removed
-
-- ?
--->
+- Created star offsets, so that the stars are drawn with a random offset, so as to not make it too "grid-like".  Stars are now placed in a more natural position (i.e. totally random, to the pixel).
 
 ## [0.3.0] - 2024-10-19
 
@@ -49,7 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[unreleased]: https://github.com/vinorodrigues/StarSaver/compare/v0.3...HEAD
+[unreleased]: https://github.com/vinorodrigues/StarSaver/compare/v0.4...HEAD
+[0.4.0]: https://github.com/vinorodrigues/StarSaver/compare/v0.3...v0.4
 [0.3.0]: https://github.com/vinorodrigues/StarSaver/compare/v0.2...v0.3
 [0.2.0]: https://github.com/vinorodrigues/StarSaver/compare/v0.1...v0.2
 [0.1.0]: https://github.com/vinorodrigues/StarSaver/releases/tag/v0.1
