@@ -79,10 +79,14 @@
   
   // Adjust star count and animation timing based on screen width
   if (self.isPreview && self.width <= 639) {
-    self.numberOfStars = 5;      // Set to 5 stars for smaller screens
+    self.numberOfStars = 10;      // Set to 5 stars for smaller screens
     self.animationTiming = 2000; // Set to 2 seconds for smaller screens
+    self.starHead = self.numberOfStars - 1;
+  } else {
+    // Initially show 1/4 the stars ;)  OG started at 0, but...
+    self.starHead = floor( self.numberOfStars / 4);
   }
-    
+  
   // Load all the star images (`star1.png` to `star5.png`)
   NSBundle *bundle = [NSBundle bundleForClass:[self class]];
   NSMutableArray *loadedImages = [NSMutableArray array];
@@ -99,9 +103,6 @@
   
   // ----- Initialise the Stars -----
   
-  // self.starHead = 0;  // Start the star "buffer" at the begining
-  self.starHead = floor( self.numberOfStars / 4);  // Initially show 1/4 the stars ;)  OG started at 0, but...
-
   // Initialize the stars array
   self.stars = [NSMutableArray array];
 
@@ -110,7 +111,6 @@
     Star *star = [[Star alloc] init];
     if (i >= self.starHead) {
       star.state = StarStateGone;
-      // star.position = NSMakePoint(0, 0); // not needed
     } else {
       star.state = StarStateNormal;
       star.position = self.randomPosition;
