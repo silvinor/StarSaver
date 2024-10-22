@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, StarState) {
 @interface Star : NSObject
   @property (nonatomic, assign) StarState state;
   @property (nonatomic, assign) NSPoint position;
-  @property (nonatomic, assign) NSPoint offs;
+  @property (nonatomic, assign) NSPoint offset;
 @end
 
 @interface StarSaverView : ScreenSaverView
@@ -29,19 +29,10 @@ typedef NS_ENUM(NSInteger, StarState) {
   @property (nonatomic, strong) NSTimer *timer;             // Timer to control star movement and animation
   @property (nonatomic, assign) NSInteger starHead;         // Current star being processed
 
-  @property (nonatomic, assign) CGFloat width;              // Width of screen at `init`
-  @property (nonatomic, assign) CGFloat height;             // Height of screen at `init`
-  @property (nonatomic, assign) NSInteger cols;             // Width / {star resources width}
-  @property (nonatomic, assign) NSInteger rows;             // Height / {star resources height}
-
   @property (nonatomic, assign) NSInteger numberOfStars;    // Number of stars
   @property (nonatomic, assign) NSInteger novaProbability;  // Probability for Nova (1 in X chance)
   @property (nonatomic, assign) NSInteger animationTiming;  // Animation timing in milliseconds
 
-  - (NSPoint)randomPosition;
-  - (NSPoint)randomOffs;
-  - (NSRect)getStarRect:(Star*)star;
-  - (void)internalInit;
   - (void)drawStarAt:(NSInteger)index;
   - (void)timerTick;
 @end

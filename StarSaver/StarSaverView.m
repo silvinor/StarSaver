@@ -15,7 +15,25 @@
 @implementation Star
 @end
 
+@interface StarSaverView ()
+  // Private vars
+  @property (nonatomic, assign) CGFloat width;              // Width of screen at `init`
+  @property (nonatomic, assign) CGFloat height;             // Height of screen at `init`
+  @property (nonatomic, assign) NSInteger cols;             // Width / {star resources width}
+  @property (nonatomic, assign) NSInteger rows;             // Height / {star resources height}
+
+  // Private methods
+  - (NSPoint)randomPosition;
+  - (NSPoint)randomOffset;
+  - (NSRect)getStarRect:(Star*)star;
+  - (void)internalInit;
+@end
+
 @implementation StarSaverView
+
+// ==================================================
+#pragma mark - Init Methods
+// ==================================================
 
 // ------------------------------
 // Initializer for normal and preview mode
@@ -40,7 +58,7 @@
 }
 
 // ------------------------------
-// Consolidated initialisation methods
+// Consolidated initialisation method
 // ------------------------------
 - (void)internalInit {
   // ----- Initialize RandomSeed -----
@@ -96,7 +114,7 @@
     } else {
       star.state = StarStateNormal;
       star.position = self.randomPosition;
-      star.offs = self.randomOffs;
+      star.offset = self.randomOffset;
     }
     [self.stars addObject:star];
   }
@@ -105,6 +123,10 @@
   //  NSTimeInterval interval = self.animationTiming / 1000.0;  // settings is in ms
   //  [self setAnimationTimeInterval:interval];
 }
+
+// ==================================================
+#pragma mark - Preference Methods
+// ==================================================
 
 // ------------------------------
 // Load the screen saver settings
@@ -153,6 +175,10 @@
   }
 }
 
+// ==================================================
+#pragma mark - Private Helper Methods
+// ==================================================
+
 // ------------------------------
 // Generate random co-ordinates
 // ------------------------------
@@ -164,7 +190,7 @@
 // ------------------------------
 // Generate random offsets
 // ------------------------------
-- (NSPoint)randomOffs {
+- (NSPoint)randomOffset {
   return NSMakePoint( SSRandomIntBetween(0, (int)STAR_CELL_WIDTH),
                       SSRandomIntBetween(0, (int)STAR_CELL_HEIGHT) );
 }
@@ -173,8 +199,8 @@
 // Get the Rect that the star lives in
 // ------------------------------
 - (NSRect)getStarRect:(Star *)star {
-  NSInteger ox = star.offs.x;
-  NSInteger oy = star.offs.y;
+  NSInteger ox = star.offset.x;
+  NSInteger oy = star.offset.y;
 
   // adjust so that it's not off screen
   while (((star.position.x * STAR_CELL_WIDTH) + ox) > self.width) {
@@ -188,31 +214,6 @@
                     (star.position.y * STAR_CELL_HEIGHT) + oy,
                     STAR_CELL_WIDTH,
                     STAR_CELL_HEIGHT );
-}
-
-// ------------------------------
-- (void)startAnimation {
-  [super startAnimation];
-  
-  // Create a timer that fires {every X} and calls the 'timerTick' method
-
-  NSTimeInterval interval = self.animationTiming / 1000.0;
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:interval
-                                                target:self
-                                              selector:@selector(timerTick)
-                                              userInfo:nil
-                                               repeats:YES];
-
-  [self setNeedsDisplay:YES];  // redraw the whole screen
-}
-
-// ------------------------------
-- (void)stopAnimation {
-  [super stopAnimation];
-
-  // Invalidate the timer when stopping the screen saver
-  [self.timer invalidate];
-  self.timer = nil;
 }
 
 // ------------------------------
@@ -248,6 +249,35 @@
   if (starImage != nil) {
     [starImage drawInRect:[self getStarRect:star]];
   }
+}
+
+// ==================================================
+#pragma mark - Key Screen Saver Methods
+// ==================================================
+
+// ------------------------------
+- (void)startAnimation {
+  [super startAnimation];
+  
+  // Create a timer that fires {every X} and calls the 'timerTick' method
+
+  NSTimeInterval interval = self.animationTiming / 1000.0;
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                                target:self
+                                              selector:@selector(timerTick)
+                                              userInfo:nil
+                                               repeats:YES];
+
+  [self setNeedsDisplay:YES];  // redraw the whole screen
+}
+
+// ------------------------------
+- (void)stopAnimation {
+  [super stopAnimation];
+
+  // Invalidate the timer when stopping the screen saver
+  [self.timer invalidate];
+  self.timer = nil;
 }
 
 // ------------------------------
@@ -306,7 +336,7 @@
 
       // New position
       star.position = self.randomPosition;  // new position
-      star.offs = self.randomOffs;  // new offset
+      star.offset = self.randomOffset;  // new offset
   
       // inc the header, i.e. move on to the next star
       self.starHead++;
@@ -331,6 +361,10 @@
 //  [self timerTick];
 //  return;
 //}
+
+// ==================================================
+#pragma mark - Configuration Sheet Methods
+// ==================================================
 
 // ------------------------------
 // ------------------------------
