@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Deprecated `NSTimer *timer` in favour of API guidelines `setAnimationTimeInterval` & `animateOneFrame`
+- Star offsets are now either on or off - based on a 1 in 2 probability and runtime. (Toss a coin :smile:)
 
 ### Removed
 
