@@ -29,10 +29,6 @@ typedef NS_ENUM(NSInteger, StarState) {
   @property (nonatomic, assign) NSInteger starHead;         // Current star being processed
   @property (nonatomic, assign) BOOL isRunning;             // Controls animation
 
-  @property (nonatomic, assign) NSInteger numberOfStars;    // Number of stars
-  @property (nonatomic, assign) NSInteger novaProbability;  // Probability for Nova (1 in X chance)
-  @property (nonatomic, assign) NSInteger animationTiming;  // Animation timing in milliseconds
-
   - (void)drawStarAt:(NSInteger)index;
   - (void)timerTick;
 @end

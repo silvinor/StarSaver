@@ -5,38 +5,31 @@
 #import "Constants.h"
 #import <ScreenSaver/ScreenSaver.h>
 
-NSString * const kXIBName = @"ConfigureSheet";
-
 @implementation ConfigureSheetController
 
 - (instancetype)init {
-  self = [super initWithWindowNibName:kXIBName];
-  if (self) {
-    // NSLog(@"ConfigureSheetController initialized with window: %@", self.window);
-    // Initialization code here
-  }
+  self = [super initWithWindowNibName:@"ConfigureSheet"];
+//  if (self) {
+//    // Initialization code here
+//  }
   return self;
 }
 
 - (void)windowDidLoad {
   [super windowDidLoad];
-  // NSLog(@"ConfigureSheetController windowDidLoad");
+  NSLog(@"ConfigureSheetController windowDidLoad");
 
   ScreenSaverDefaults *defaults = [ScreenSaverDefaults defaultsForModuleWithName:kModuleName];
   
   // Load existing preferences
-  // NSLog(@"ConfigureSheetController windowDidLoad A");
   NSInteger numberOfStars = [defaults integerForKey:kNumberOfStars];
   NSInteger novaProbability = [defaults integerForKey:kNovaProbability];
   NSInteger animationTiming = [defaults integerForKey:kAnimationTiming];
 
   // Set UI elements
-  // NSLog(@"ConfigureSheetController windowDidLoad B");
   [self.numberOfStarsField setIntegerValue:numberOfStars];
   [self.novaProbabilityField setIntegerValue:novaProbability];
   [self.animationTimingField setIntegerValue:animationTiming];
-  
-  // NSLog(@"ConfigureSheetController windowDidLoad C");
 }
 
 - (IBAction)okButtonPressed:(id)sender {
@@ -64,12 +57,10 @@ NSString * const kXIBName = @"ConfigureSheet";
   [defaults synchronize];
 
   [NSApp endSheet:self.window];
-  [self.window orderOut:nil];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
   [NSApp endSheet:self.window];
-  [self.window orderOut:nil];
 }
 
 @end

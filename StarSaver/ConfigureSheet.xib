@@ -9,15 +9,15 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ConfigureSheetController">
             <connections>
                 <outlet property="animationTimingField" destination="TB5-05-1zt" id="LRM-Il-5KN"/>
+                <outlet property="configureSheet" destination="kcd-bg-8M1" id="fY7-CY-sbd"/>
                 <outlet property="novaProbabilityField" destination="RQT-5A-rGa" id="5nX-6r-TkC"/>
                 <outlet property="numberOfStarsField" destination="dRk-oF-8wp" id="WCM-JB-XoC"/>
-                <outlet property="window" destination="kcd-bg-8M1" id="h8W-i0-MbN"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="kcd-bg-8M1" customClass="NSPanel">
-            <windowStyleMask key="styleMask" utility="YES"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="kcd-bg-8M1">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="283" y="305" width="369" height="217"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>

@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		273FCE9E2CC1960E0042154F /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 273FCE9D2CC1960E0042154F /* thumbnail.png */; };
-<<<<<<< Updated upstream
-=======
+		2751549A2CC7C836008DC4BF /* ConfigureSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275154992CC7C836008DC4BF /* ConfigureSheet.xib */; };
 		2751549E2CC7D191008DC4BF /* ConfigureSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2751549C2CC7D191008DC4BF /* ConfigureSheetController.h */; };
 		2751549F2CC7D191008DC4BF /* ConfigureSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2751549D2CC7D191008DC4BF /* ConfigureSheetController.m */; };
 		275154A42CC7DB8C008DC4BF /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 275154A22CC7DB8C008DC4BF /* Constants.h */; };
 		275154A92CC7E277008DC4BF /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 275154A82CC7E277008DC4BF /* Constants.m */; };
->>>>>>> Stashed changes
 		27A6C0542CC3D9D40060289D /* StarSaver.icns in Resources */ = {isa = PBXBuildFile; fileRef = 27A6C0532CC3D9D40060289D /* StarSaver.icns */; };
 		27B76C3A2CC02230007DC752 /* StarSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B76C392CC02230007DC752 /* StarSaverView.m */; };
 		27B76C442CC022FE007DC752 /* star1.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C432CC022FE007DC752 /* star1.png */; };
@@ -22,15 +20,15 @@
 		27B76C4B2CC0236C007DC752 /* star4.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C472CC0236C007DC752 /* star4.png */; };
 		27B76C4C2CC0236C007DC752 /* star2.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C482CC0236C007DC752 /* star2.png */; };
 		27B76C4D2CC0236C007DC752 /* star5.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C492CC0236C007DC752 /* star5.png */; };
-<<<<<<< Updated upstream
-		27B76C632CC03D79007DC752 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B76C622CC03D79007DC752 /* config.json */; };
-=======
-		27CD48772CC8C20500E89A28 /* ConfigureSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275154992CC7C836008DC4BF /* ConfigureSheet.xib */; };
->>>>>>> Stashed changes
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		273FCE9D2CC1960E0042154F /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
+		275154992CC7C836008DC4BF /* ConfigureSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigureSheet.xib; sourceTree = "<group>"; };
+		2751549C2CC7D191008DC4BF /* ConfigureSheetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfigureSheetController.h; sourceTree = "<group>"; };
+		2751549D2CC7D191008DC4BF /* ConfigureSheetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigureSheetController.m; sourceTree = "<group>"; };
+		275154A22CC7DB8C008DC4BF /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		275154A82CC7E277008DC4BF /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		27A6C0532CC3D9D40060289D /* StarSaver.icns */ = {isa = PBXFileReference; explicitFileType = image.icns; path = StarSaver.icns; sourceTree = "<group>"; };
 		27B76C342CC02230007DC752 /* StarSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B76C392CC02230007DC752 /* StarSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StarSaverView.m; sourceTree = "<group>"; wrapsLines = 0; };
@@ -40,7 +38,6 @@
 		27B76C472CC0236C007DC752 /* star4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star4.png; sourceTree = "<group>"; };
 		27B76C482CC0236C007DC752 /* star2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star2.png; sourceTree = "<group>"; };
 		27B76C492CC0236C007DC752 /* star5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star5.png; sourceTree = "<group>"; };
-		27B76C622CC03D79007DC752 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		27B76C652CC03F92007DC752 /* StarSaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarSaverView.h; sourceTree = "<group>"; wrapsLines = 0; };
 /* End PBXFileReference section */
 
@@ -65,7 +62,6 @@
 				27B76C462CC0236C007DC752 /* star3.png */,
 				27B76C472CC0236C007DC752 /* star4.png */,
 				27B76C492CC0236C007DC752 /* star5.png */,
-				27B76C622CC03D79007DC752 /* config.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -93,6 +89,11 @@
 				27B76C3B2CC02230007DC752 /* Info.plist */,
 				27B76C652CC03F92007DC752 /* StarSaverView.h */,
 				27B76C392CC02230007DC752 /* StarSaverView.m */,
+				275154992CC7C836008DC4BF /* ConfigureSheet.xib */,
+				2751549C2CC7D191008DC4BF /* ConfigureSheetController.h */,
+				2751549D2CC7D191008DC4BF /* ConfigureSheetController.m */,
+				275154A22CC7DB8C008DC4BF /* Constants.h */,
+				275154A82CC7E277008DC4BF /* Constants.m */,
 			);
 			path = StarSaver;
 			sourceTree = "<group>";
@@ -104,6 +105,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				275154A42CC7DB8C008DC4BF /* Constants.h in Headers */,
+				2751549E2CC7D191008DC4BF /* ConfigureSheetController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,12 +173,8 @@
 				273FCE9E2CC1960E0042154F /* thumbnail.png in Resources */,
 				27B76C4D2CC0236C007DC752 /* star5.png in Resources */,
 				27A6C0542CC3D9D40060289D /* StarSaver.icns in Resources */,
-				27CD48772CC8C20500E89A28 /* ConfigureSheet.xib in Resources */,
 				27B76C4A2CC0236C007DC752 /* star3.png in Resources */,
-<<<<<<< Updated upstream
-				27B76C632CC03D79007DC752 /* config.json in Resources */,
-=======
->>>>>>> Stashed changes
+				2751549A2CC7C836008DC4BF /* ConfigureSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +185,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2751549F2CC7D191008DC4BF /* ConfigureSheetController.m in Sources */,
 				27B76C3A2CC02230007DC752 /* StarSaverView.m in Sources */,
+				275154A92CC7E277008DC4BF /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
