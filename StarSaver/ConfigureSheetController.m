@@ -9,15 +9,21 @@
 
 - (instancetype)init {
   self = [super initWithWindowNibName:@"ConfigureSheet"];
-//  if (self) {
-//    // Initialization code here
-//  }
+  if (self) {
+    #ifdef DEBUG
+    NSLog(@"ConfigureSheetController initialized with window: %@", self.window);
+    #endif
+    // Initialization code here
+  }
   return self;
 }
 
 - (void)windowDidLoad {
   [super windowDidLoad];
-  NSLog(@"ConfigureSheetController windowDidLoad");
+  
+  #ifdef DEBUG
+  NSLog(@"ConfigureSheetController windowDidLoad, window: %@", self.window);
+  #endif
 
   ScreenSaverDefaults *defaults = [ScreenSaverDefaults defaultsForModuleWithName:kModuleName];
   
@@ -33,6 +39,10 @@
 }
 
 - (IBAction)okButtonPressed:(id)sender {
+  #ifdef DEBUG
+  NSLog(@"ConfigureSheetController okButtonPressed");
+  #endif
+
   ScreenSaverDefaults *defaults = [ScreenSaverDefaults defaultsForModuleWithName:kModuleName];
 
   NSInteger numberOfStars = [self.numberOfStarsField integerValue];
@@ -57,10 +67,16 @@
   [defaults synchronize];
 
   [NSApp endSheet:self.window];
+  [self.window orderOut:nil];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
+  #ifdef DEBUG
+  NSLog(@"ConfigureSheetController cancelButtonPressed");
+  #endif
+
   [NSApp endSheet:self.window];
+  [self.window orderOut:nil];
 }
 
 @end

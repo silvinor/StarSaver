@@ -32,12 +32,12 @@
   @property (assign) NSInteger novaProbability;  // Probability for Nova (1 in X chance)
   @property (assign) NSInteger animationTiming;  // Animation timing in milliseconds
 
-
   // Private methods
   - (NSPoint)randomPosition;
   - (NSPoint)randomOffset;
   - (NSRect)getStarRect:(Star*)star;
   - (void)internalInit;
+  - (BOOL)isMiniPreview;
 @end
 
 @implementation StarSaverView
@@ -51,7 +51,9 @@
 // ------------------------------
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview {
   self = [super initWithFrame:frame isPreview:isPreview];
-  NSLog(@"StarSaverView initWithFrame:isPreview:");
+  #ifdef DEBUG
+  NSLog(@"StarSaverView initWithFrame:isPreview:%@", isPreview ? @"YES" : @"NO");
+  #endif
   if (self) {
     [self internalInit];
   }
@@ -63,7 +65,9 @@
 // ------------------------------
 - (instancetype)initWithCoder:(NSCoder *)coder {
   self = [super initWithCoder:coder];
-  NSLog(@"StarSaverView initWithCoder:isPreview:");
+  #ifdef DEBUG
+  NSLog(@"StarSaverView initWithCoder:");
+  #endif
   if (self) {
     [self internalInit];
   }
@@ -74,55 +78,62 @@
 // Consolidated initialisation method
 // ------------------------------
 - (void)internalInit {
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit");
+  #endif
   self.isRunning = false;
   
   // ----- Initialize RandomSeed -----
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit A");
+  #endif
   // Use the current time to set a unique seed
   srand((unsigned int)time(NULL));  // used by `rand()`
   srandom((unsigned int)time(NULL));  // used by `random()`
 
   // ----- Get the size of the screen -----
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit B");
+  #endif
   self.width = self.bounds.size.width; if (self.width <= 0) { self.width = 1; }
   self.height = self.bounds.size.height; if (self.height <= 0) { self.width = 1; }
   self.cols = floor( self.width / STAR_CELL_WIDTH ); if (self.cols <= 0) { self.cols = 1; }
   self.rows = floor( self.height / STAR_CELL_HEIGHT ); if (self.rows <= 0) { self.rows = 1; }
-    
+  #ifdef DEBUG
+  NSLog(@"StarSaverView internalInit self.width = %ld, self.height = %ld", (long)self.width, (long)self.height);
+  NSLog(@"StarSaverView internalInit self.cols = %ld, self.rows = %ld", (long)self.cols, (long)self.rows);
+  #endif
+  
   // ----- Preferences -----
-
+  
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit C");
+  #endif
   NSNumber *fallbackNumberOfStars;
   NSNumber *fallbackNovaProbability;
   NSNumber *fallbackAnimationTiming;
 
-  @try {
-    // Default to 1% of the cell count
-    // On Legacy iMac 27" that's `((2560/14)*(1440/14))*0.01` = `188`
-    // Have not tested this on a Retina display :(
-    NSLog(@"StarSaverView internalInit self.rows = %ld, self.cols = %ld", (long)self.rows, (long)self.cols);
-    fallbackNumberOfStars = @(floor((self.rows * self.cols) * 0.01));
-    // Default Nova probability to 1 in 25
-    fallbackNovaProbability = @(25);
-    // Default animation timing set so that each star lives for aprox. 1 m
-    NSLog(@"StarSaverView internalInit self.numberOfStars = %ld", (long)self.numberOfStars);
-    if (self.numberOfStars > 0) {
-      fallbackAnimationTiming = @(floor((1000 * 60) / (self.numberOfStars / 2)));
-    } else {
-      fallbackAnimationTiming = @(250);
-    }
-  }
-  @catch (NSException *exception) {
-    NSLog(@"StarSaverView internalInit Exception: %@", exception);
-    return;
+  // Default to 1% of the cell count
+  // On Legacy iMac 27" that's `((2560/14)*(1440/14))*0.01` = `188`
+  // Have not tested this on a Retina display :(
+  fallbackNumberOfStars = @(floor((self.rows * self.cols) * 0.01));
+  // Default Nova probability to 1 in 25
+  fallbackNovaProbability = @(25);
+  // Default animation timing set so that each star lives for aprox. 1 m
+  if (self.numberOfStars > 0) {
+    fallbackAnimationTiming = @(floor((1000 * 60) / ((int)fallbackNumberOfStars / 2)));
+  } else {
+    fallbackAnimationTiming = @(250);
   }
 
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit 1");
+  #endif
   ScreenSaverDefaults *defaults = [ScreenSaverDefaults defaultsForModuleWithName:kModuleName];
-  NSLog(@"StarSaverView internalInit 2");
 
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit D");
+  #endif
   // Register default preferences
   [defaults registerDefaults:@{
     kNumberOfStars: fallbackNumberOfStars,
@@ -130,23 +141,39 @@
     kAnimationTiming: fallbackAnimationTiming
     }];
 
+  // ----- Set up self vars -----
+
   // Load user configuration
-  NSLog(@"StarSaverView internalInit 3");
-  [self loadPreferences];
-  NSLog(@"StarSaverView internalInit 4");
-  
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit E");
-  // Adjust star count and animation timing based on screen width
-  if (self.isPreview && self.width <= 639) {
-    self.numberOfStars = 10;      // Set to 5 stars for smaller screens
-    self.animationTiming = 2000; // Set to 2 seconds for smaller screens
-    self.starHead = self.numberOfStars - 1;
-  } else {
-    // Initially show 1/4 the stars ;)  OG started at 0, but...
+  #endif
+  [self loadPreferences];
+
+  if (!self.isMiniPreview) {
+    #ifdef DEBUG
+    NSLog(@"StarSaverView internalInit E.1");
+    #endif
     self.starHead = floor( self.numberOfStars / 4);
+  } else {
+    #ifdef DEBUG
+    NSLog(@"StarSaverView internalInit E.2");
+    #endif
+    self.starHead = self.numberOfStars - 1; // Set to end of star array
   }
   
+  #ifdef DEBUG
+  NSLog(@"StarSaverView internalInit self. .. numberOfStars = %ld, novaProbability = %ld, animationTiming = %ld, starHead = %ld",
+        (long)self.numberOfStars,
+        (long)self.novaProbability,
+        (long)self.animationTiming,
+        (long)self.starHead );
+  #endif
+  
+  // ----- Load Images -----
+  
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit F");
+  #endif
   // Load all the star images (`star1.png` to `star5.png`)
   NSBundle *bundle = [NSBundle bundleForClass:[self class]];
   NSMutableArray *loadedImages = [NSMutableArray array];
@@ -162,8 +189,10 @@
   self.starImages = [loadedImages copy];
   
   // ----- Initialise the Stars -----
-  
+ 
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit G");
+  #endif
   // Initialize the stars array
   self.stars = [NSMutableArray array];
 
@@ -184,7 +213,9 @@
     [self.stars addObject:star];
   }
 
+  #ifdef DEBUG
   NSLog(@"StarSaverView internalInit H");
+  #endif
   // Needs `animateOneFrame`
   NSTimeInterval interval = self.animationTiming / 1000.0;  // settings is in ms
   [self setAnimationTimeInterval:interval];
@@ -198,17 +229,33 @@
 // Load the screen saver settings
 // ------------------------------
 - (void)loadPreferences {
+  #ifdef DEBUG
   NSLog(@"StarSaverView loadPreferences");
-  ScreenSaverDefaults *defaults = [ScreenSaverDefaults defaultsForModuleWithName:kModuleName];
+  #endif
+  
+  if (!self.isMiniPreview) {
+    ScreenSaverDefaults *defaults = [ScreenSaverDefaults defaultsForModuleWithName:kModuleName];
 
-  self.numberOfStars = [defaults integerForKey:kNumberOfStars];
-  self.novaProbability = [defaults integerForKey:kNovaProbability];
-  self.animationTiming = [defaults integerForKey:kAnimationTiming];
+    self.numberOfStars = [defaults integerForKey:kNumberOfStars];
+    self.novaProbability = [defaults integerForKey:kNovaProbability];
+    self.animationTiming = [defaults integerForKey:kAnimationTiming];
+  } else {
+    self.numberOfStars = 10;     // Set to 5 stars for smaller screens
+    self.novaProbability = 25;   // 1 in 25 probability
+    self.animationTiming = 2000; // Set to 2 seconds for smaller screens
+  }
 }
 
 // ==================================================
 #pragma mark - Private Helper Methods
 // ==================================================
+
+// ------------------------------
+// Assess if in System Preferences mini view
+// ------------------------------
+- (BOOL)isMiniPreview {
+  return self.isPreview && (self.bounds.size.width < 640);
+}
 
 // ------------------------------
 // Generate random co-ordinates
@@ -251,6 +298,10 @@
 // Draw star at n-th position
 // ------------------------------
 - (void)drawStarAt:(NSInteger)index {
+  #ifdef DEBUG
+  NSLog(@"StarSaverView drawStarAt:%ld", (long)index);
+  #endif
+
   NSImage *starImage;
   Star *star = [self.stars objectAtIndex:(index)];  // Get the start at the head position
 
@@ -288,21 +339,25 @@
 
 // ------------------------------
 - (void)startAnimation {
+  #ifdef DEBUG
   NSLog(@"StarSaverView startAnimation");
+  #endif
   [super startAnimation];
  
   [self loadPreferences];
   
-  self.isRunning = true;
+  self.isRunning = YES;
   [self setNeedsDisplay:YES];  // redraw the whole screen
 }
 
 // ------------------------------
 - (void)stopAnimation {
+  #ifdef DEBUG
   NSLog(@"StarSaverView stopAnimation");
+  #endif
   [super stopAnimation];
   
-  self.isRunning = false;
+  self.isRunning = NO;
 }
 
 // ------------------------------
@@ -310,6 +365,14 @@
 // ------------------------------
 - (void)drawRect:(NSRect)rect {
   [super drawRect:rect];
+  
+  #ifdef DEBUG
+  NSLog(@"StarSaverView drawRect (%ld, %ld, %ld, %ld)",
+        (long)rect.origin.x,
+        (long)rect.origin.y,
+        (long)rect.size.width,
+        (long)rect.size.height );
+  #endif
   
   // Fill the background with black
   [[NSColor blackColor] setFill];
@@ -330,6 +393,11 @@
 // ------------------------------
 - (void)animateOneFrame {
   [super animateOneFrame];
+  
+  #ifdef DEBUG
+  NSLog(@"StarSaverView animateOneFrame");
+  #endif
+  
   if (self.isRunning) {
     [self timerTick];
   }
@@ -340,6 +408,10 @@
 // Abstracting Timer Ticks here
 // ---------------------------------
 - (void)timerTick {
+  #ifdef DEBUG
+  NSLog(@"StarSaverView timerTick (%ld)", (long)self.starHead);
+  #endif
+  
   NSInteger index = self.starHead;
   
   Star *star = [self.stars objectAtIndex:(index)];  // Get the start at the head position
@@ -397,18 +469,29 @@
 // ------------------------------
 // ------------------------------
 - (BOOL)hasConfigureSheet {
+  #ifdef DEBUG
   NSLog(@"StarSaverView hasConfigureSheet");
+  #endif
   return YES;
 }
 
 // ------------------------------
 // ------------------------------
 - (NSWindow*)configureSheet {
+  #ifdef DEBUG
   NSLog(@"StarSaverView configureSheet");
+  #endif
   
   if (!self.configureSheetController) {
     self.configureSheetController = [[ConfigureSheetController alloc] init];
   }
+  #ifdef DEBUG
+  if (self.configureSheetController.window == nil) {
+    NSLog(@"Error: configureSheetController.window is nil");
+  } else {
+    NSLog(@"Returning configureSheetController.window: %@", self.configureSheetController.window);
+  }
+  #endif
   return self.configureSheetController.window;
 }
 
