@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.5.0] - 2024-10-23
+
+### Added
+
+- Defaults loaded from MacOS API `ScreenSaverDefaults` and `defaultsForModuleWithName`
+- Added `ConfigureSheet.xib` and functionality
+- Added `ConfigureSheetController` class
+- Added `Constants` for module name etc.
+
+### Changed
+
+- Deprecated `NSTimer *timer` in favour of API guidelines `setAnimationTimeInterval` & `animateOneFrame`
+- Star offsets are now either on or off - based on a 1 in 2 probability and runtime. (Toss a coin :smile:)
+
+### Removed
+
+- Removed use of the `config.json` file, including loading defaults.
+
 ## [0.4.0] - 2024-10-21
 
 ### Changed
@@ -39,7 +57,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[unreleased]: https://github.com/vinorodrigues/StarSaver/compare/v0.4...HEAD
+[unreleased]: https://github.com/vinorodrigues/StarSaver/compare/v0.5...HEAD
+[0.5.0]: https://github.com/vinorodrigues/StarSaver/compare/v0.4...v0.5
 [0.4.0]: https://github.com/vinorodrigues/StarSaver/compare/v0.3...v0.4
 [0.3.0]: https://github.com/vinorodrigues/StarSaver/compare/v0.2...v0.3
 [0.2.0]: https://github.com/vinorodrigues/StarSaver/compare/v0.1...v0.2
