@@ -121,7 +121,8 @@
   fallbackNovaProbability = @(25);
   // Default animation timing set so that each star lives for aprox. 1 m
   if (self.numberOfStars > 0) {
-    fallbackAnimationTiming = @(floor((1000 * 60) / ((int)fallbackNumberOfStars / 2)));
+    fallbackAnimationTiming = @(floor((1000 * 60) / ([fallbackNumberOfStars intValue] / 2.0)));
+    // fallbackAnimationTiming = @(floor((1000 * 60) / ((int)fallbackNumberOfStars / 2)));
   } else {
     fallbackAnimationTiming = @(250);
   }
