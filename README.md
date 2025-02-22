@@ -53,4 +53,4 @@ And from there we refine ... see the [CHANGELOG](CHANGELOG.md).
 
 ---
 
-Made with :heart: by **Vino Rodrigues**
+Made with :heart: by **Silvino Rodrigues**

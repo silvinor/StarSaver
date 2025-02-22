@@ -2,7 +2,7 @@
  * Commander Starry Night Screen Saver
  * A clone of the old Norton Commander 4 Saver
  *
- * ©️ 2024 Vino Rodrigues
+ * ©️ 2024 Silvino Rodrigues
  * 
  * @see: https://developer.apple.com/documentation/screensaver?language=objc
  */

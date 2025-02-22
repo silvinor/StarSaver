@@ -138,7 +138,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = com.vinorodrigues;
+				ORGANIZATIONNAME = com.silvinor;
 				TargetAttributes = {
 					27B76C332CC02230007DC752 = {
 						CreatedOnToolsVersion = 12.4;
@@ -324,7 +324,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vinorodrigues.StarSaver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
 			};
@@ -337,7 +337,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vinorodrigues.StarSaver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
 			};
