@@ -3,7 +3,7 @@
  * A clone of the old Norton Commander 4 Saver
  *
  * ©️ 2024 Silvino Rodrigues
- * 
+ *
  * @see: https://developer.apple.com/documentation/screensaver?language=objc
  */
 
@@ -18,7 +18,6 @@
 @end
 
 @interface StarSaverView ()
-
   // Private vars
   @property (nonatomic, assign) CGFloat width;   // Width of screen at `init`
   @property (nonatomic, assign) CGFloat height;  // Height of screen at `init`
@@ -46,9 +45,9 @@
 #pragma mark - Init Methods
 // ==================================================
 
-// ------------------------------
-// Initializer for normal and preview mode
-// ------------------------------
+/* ------------------------------
+ * Initializer for normal and preview mode
+ * ------------------------------ */
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview {
   self = [super initWithFrame:frame isPreview:isPreview];
   #ifdef DEBUG
@@ -60,9 +59,9 @@
   return self;
 }
 
-// ------------------------------
-// Initializer for coder-based initialization
-// ------------------------------
+/* ------------------------------
+ * Initializer for coder-based initialization
+ * ------------------------------ */
 - (instancetype)initWithCoder:(NSCoder *)coder {
   self = [super initWithCoder:coder];
   #ifdef DEBUG
@@ -74,9 +73,9 @@
   return self;
 }
 
-// ------------------------------
-// Consolidated initialisation method
-// ------------------------------
+/* ------------------------------
+ * Consolidated initialisation method
+ * ------------------------------ */
 - (void)internalInit {
   #ifdef DEBUG
   NSLog(@"StarSaverView internalInit");
@@ -84,6 +83,7 @@
   self.isRunning = false;
   
   // ----- Initialize RandomSeed -----
+
   #ifdef DEBUG
   NSLog(@"StarSaverView internalInit A");
   #endif
@@ -92,6 +92,7 @@
   srandom((unsigned int)time(NULL));  // used by `random()`
 
   // ----- Get the size of the screen -----
+
   #ifdef DEBUG
   NSLog(@"StarSaverView internalInit B");
   #endif
@@ -105,7 +106,7 @@
   #endif
   
   // ----- Preferences -----
-  
+
   #ifdef DEBUG
   NSLog(@"StarSaverView internalInit C");
   #endif
@@ -214,6 +215,8 @@
     [self.stars addObject:star];
   }
 
+  // ----- Set up timer -----
+  
   #ifdef DEBUG
   NSLog(@"StarSaverView internalInit H");
   #endif
@@ -226,9 +229,9 @@
 #pragma mark - Preference Methods
 // ==================================================
 
-// ------------------------------
-// Load the screen saver settings
-// ------------------------------
+/* ------------------------------
+ * Load the screen saver settings
+ * ------------------------------ */
 - (void)loadPreferences {
   #ifdef DEBUG
   NSLog(@"StarSaverView loadPreferences");
@@ -251,32 +254,32 @@
 #pragma mark - Private Helper Methods
 // ==================================================
 
-// ------------------------------
-// Assess if in System Preferences mini view
-// ------------------------------
+/* ------------------------------
+ * Assess if in System Preferences mini view
+ * ------------------------------ */
 - (BOOL)isMiniPreview {
   return self.isPreview && (self.bounds.size.width < 640);
 }
 
-// ------------------------------
-// Generate random co-ordinates
-// ------------------------------
+/* ------------------------------
+ * Generate random co-ordinates
+ * ------------------------------ */
 - (NSPoint)randomPosition {
   return NSMakePoint( SSRandomIntBetween(0, (int)self.cols),
                       SSRandomIntBetween(0, (int)self.rows) );
 }
 
-// ------------------------------
-// Generate random offsets
-// ------------------------------
+/* ------------------------------
+ * Generate random offsets
+ * ------------------------------ */
 - (NSPoint)randomOffset {
   return NSMakePoint( SSRandomIntBetween(0, (int)STAR_CELL_WIDTH),
                       SSRandomIntBetween(0, (int)STAR_CELL_HEIGHT) );
 }
 
-// ------------------------------
-// Get the Rect that the star lives in
-// ------------------------------
+/* ------------------------------
+ * Get the Rect that the star lives in
+ * ------------------------------ */
 - (NSRect)getStarRect:(Star *)star {
   NSInteger ox = star.offset.x;
   NSInteger oy = star.offset.y;
@@ -295,9 +298,9 @@
                     STAR_CELL_HEIGHT );
 }
 
-// ------------------------------
-// Draw star at n-th position
-// ------------------------------
+/* ------------------------------
+ * Draw star at n-th position
+ * ------------------------------ */
 - (void)drawStarAt:(NSInteger)index {
   #ifdef DEBUG
   NSLog(@"StarSaverView drawStarAt:%ld", (long)index);
@@ -338,7 +341,7 @@
 #pragma mark - Key Screen Saver Methods
 // ==================================================
 
-// ------------------------------
+/* ------------------------------ */
 - (void)startAnimation {
   #ifdef DEBUG
   NSLog(@"StarSaverView startAnimation");
@@ -351,7 +354,7 @@
   [self setNeedsDisplay:YES];  // redraw the whole screen
 }
 
-// ------------------------------
+/* ------------------------------ */
 - (void)stopAnimation {
   #ifdef DEBUG
   NSLog(@"StarSaverView stopAnimation");
@@ -361,18 +364,18 @@
   self.isRunning = NO;
 }
 
-// ------------------------------
-// Draw area needed
-// ------------------------------
+/* ------------------------------
+ * Draw area needed
+ * ------------------------------ */
 - (void)drawRect:(NSRect)rect {
   [super drawRect:rect];
   
   #ifdef DEBUG
   NSLog(@"StarSaverView drawRect (%ld, %ld, %ld, %ld)",
-        (long)rect.origin.x,
-        (long)rect.origin.y,
-        (long)rect.size.width,
-        (long)rect.size.height );
+    (long)rect.origin.x,
+    (long)rect.origin.y,
+    (long)rect.size.width,
+    (long)rect.size.height );
   #endif
   
   // Fill the background with black
@@ -388,10 +391,10 @@
   }
 }
 
-// ------------------------------
-// Gets called repeatedly to draw states on timer ticks
-// when used with `setAnimationTimeInterval`
-// ------------------------------
+/* ------------------------------
+ * Gets called repeatedly to draw states on timer ticks
+ * when used with `setAnimationTimeInterval`
+ * ------------------------------ */
 - (void)animateOneFrame {
   [super animateOneFrame];
   
@@ -405,9 +408,9 @@
   return;
 }
 
-// ---------------------------------
-// Abstracting Timer Ticks here
-// ---------------------------------
+/* ---------------------------------
+ * Abstracting Timer Ticks here
+ * --------------------------------- */
 - (void)timerTick {
   #ifdef DEBUG
   NSLog(@"StarSaverView timerTick (%ld)", (long)self.starHead);
@@ -467,8 +470,8 @@
 #pragma mark - Configuration Sheet Methods
 // ==================================================
 
-// ------------------------------
-// ------------------------------
+/* ------------------------------
+ * ------------------------------ */
 - (BOOL)hasConfigureSheet {
   #ifdef DEBUG
   NSLog(@"StarSaverView hasConfigureSheet");
@@ -476,8 +479,8 @@
   return YES;
 }
 
-// ------------------------------
-// ------------------------------
+/* ------------------------------
+ * ------------------------------ */
 - (NSWindow*)configureSheet {
   #ifdef DEBUG
   NSLog(@"StarSaverView configureSheet");

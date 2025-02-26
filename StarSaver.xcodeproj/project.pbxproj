@@ -72,7 +72,9 @@
 				27B76C362CC02230007DC752 /* StarSaver */,
 				27B76C352CC02230007DC752 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		27B76C352CC02230007DC752 /* Products */ = {
 			isa = PBXGroup;
@@ -322,7 +324,9 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 5;
 				INFOPLIST_FILE = StarSaver/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Star Saver";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -335,7 +339,9 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 5;
 				INFOPLIST_FILE = StarSaver/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Star Saver";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
