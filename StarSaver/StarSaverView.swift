@@ -151,7 +151,11 @@ final class StarSaverView: ScreenSaverView {
     }
     starImages = loadedImages
 
-    resetStars()
+    // Only the mini preview gets stars now, so the System Settings
+    // thumbnail is not black. Full screen gets them in `startAnimation`.
+    if isMiniPreview {
+      resetStars()
+    }
 
     #if DEBUG
     NSLog("StarSaverView internalInit self. .. numberOfStars = %ld, novaProbability = %ld, animationTiming = %ld, starHead = %ld",
@@ -285,7 +289,11 @@ final class StarSaverView: ScreenSaverView {
     super.startAnimation()
 
     loadPreferences()
-    resetStars()
+    // Keep the stars made in `internalInit` on the first start, or the
+    // first frame jumps to a new layout. `lameDuck` means a stop happened.
+    if lameDuck || stars.count != numberOfStars {
+      resetStars()
+    }
 
     // A fresh start means the host process is alive and reusing this view;
     // cancel any pending safety-net exit from a previous stop.
@@ -323,7 +331,7 @@ final class StarSaverView: ScreenSaverView {
     rect.fill()
 
     // Draw the stars if needed
-    for i in 0..<numberOfStars {
+    for i in stars.indices {
       let star = stars[i]
       if rect.contains(starRect(for: star)) {
         drawStar(at: i)
