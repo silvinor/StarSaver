@@ -119,7 +119,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2660;
+				LastUpgradeCheck = 2700;
 				ORGANIZATIONNAME = com.silvinor;
 				TargetAttributes = {
 					27B76C332CC02230007DC752 = {
@@ -181,7 +181,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = x86_64;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -254,7 +253,7 @@
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Star Saver";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -323,10 +322,10 @@
 				OBJROOT = "$(SRCROOT)/build";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SYMROOT = "$(SRCROOT)/build";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_VERSION = 5.0;
+				SYMROOT = "$(SRCROOT)/build";
 				VERSION_INFO_PREFIX = v;
 				VERSION_INFO_SUFFIX = "-beta";
 			};
@@ -388,11 +387,11 @@
 				OBJROOT = "$(SRCROOT)/build";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SYMROOT = "$(SRCROOT)/build";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
+				SYMROOT = "$(SRCROOT)/build";
 				VERSION_INFO_PREFIX = v;
 				VERSION_INFO_SUFFIX = "-beta";
 			};
@@ -408,7 +407,7 @@
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Star Saver";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -425,7 +424,7 @@
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Star Saver";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -442,7 +441,7 @@
 				INFOPLIST_FILE = StarSaver/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Star Saver";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvinor.StarSaver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -453,7 +452,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

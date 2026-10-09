@@ -43,7 +43,7 @@ final class StarSaverView: ScreenSaverView {
   private var height: CGFloat = 1              // Height of screen at `init`
   private var cols: Int = 1                    // Width / {star resources width}
   private var rows: Int = 1                    // Height / {star resources height}
-  private var doOffsets = false                // To offset or not
+  private var doOffsets = true                 // To offset or not
 
   private var configureSheetController: ConfigureSheetController?
 
@@ -138,17 +138,6 @@ final class StarSaverView: ScreenSaverView {
     // Load user configuration
     loadPreferences()
 
-    if !isMiniPreview {
-      starHead = numberOfStars / 4
-    } else {
-      starHead = numberOfStars - 1  // Set to end of star array
-    }
-
-    #if DEBUG
-    NSLog("StarSaverView internalInit self. .. numberOfStars = %ld, novaProbability = %ld, animationTiming = %ld, starHead = %ld",
-          numberOfStars, novaProbability, animationTiming, starHead)
-    #endif
-
     // ----- Load Images -----
 
     // Load all the star images (`star1.png` to `star5.png`)
@@ -162,27 +151,12 @@ final class StarSaverView: ScreenSaverView {
     }
     starImages = loadedImages
 
-    // ----- Initialise the Stars -----
+    resetStars()
 
-    // Build the star array with initial random positions
-    var newStars: [Star] = []
-    for i in 0..<numberOfStars {
-      let star = Star()
-      if i >= starHead {
-        star.state = .gone
-      } else {
-        star.state = .normal
-        star.position = randomPosition()
-        star.offset = doOffsets ? randomOffset() : NSPoint(x: 0, y: 0)
-      }
-      newStars.append(star)
-    }
-    stars = newStars
-
-    // ----- Set up timer -----
-
-    // Needs `animateOneFrame`
-    animationTimeInterval = TimeInterval(animationTiming) / 1000.0  // settings is in ms
+    #if DEBUG
+    NSLog("StarSaverView internalInit self. .. numberOfStars = %ld, novaProbability = %ld, animationTiming = %ld, starHead = %ld",
+          numberOfStars, novaProbability, animationTiming, starHead)
+    #endif
   }
 
   // ==================================================
@@ -200,11 +174,11 @@ final class StarSaverView: ScreenSaverView {
     if !isMiniPreview {
       let defaults = ScreenSaverDefaults(forModuleWithName: kModuleName)!
 
-      numberOfStars = defaults.integer(forKey: kNumberOfStars)
-      novaProbability = defaults.integer(forKey: kNovaProbability)
-      animationTiming = defaults.integer(forKey: kAnimationTiming)
+      numberOfStars = min(max(defaults.integer(forKey: kNumberOfStars), 1), 1000)
+      novaProbability = min(max(defaults.integer(forKey: kNovaProbability), 1), 1000)
+      animationTiming = min(max(defaults.integer(forKey: kAnimationTiming), 60), 10000)
     } else {
-      numberOfStars = 10     // Set to 5 stars for smaller screens
+      numberOfStars = 10     // Set to 10 stars for smaller screens
       novaProbability = 25   // 1 in 25 probability
       animationTiming = 2000 // Set to 2 seconds for smaller screens
     }
@@ -221,18 +195,31 @@ final class StarSaverView: ScreenSaverView {
     return isPreview && bounds.size.width < 640
   }
 
+  private func resetStars() {
+    let visibleStarCount = isMiniPreview ? numberOfStars - 1 : numberOfStars / 4
+    stars = (0..<numberOfStars).map { index in
+      let star = Star()
+      star.state = index < visibleStarCount ? .normal : .gone
+      star.position = randomPosition()
+      star.offset = doOffsets ? randomOffset() : .zero
+      return star
+    }.shuffled()
+    starHead = randomInt(0, numberOfStars - 1)
+    animationTimeInterval = TimeInterval(animationTiming) / 1000.0
+  }
+
   /* ------------------------------
    * Generate random co-ordinates
    * ------------------------------ */
   private func randomPosition() -> NSPoint {
-    return NSPoint(x: CGFloat(randomInt(0, cols)), y: CGFloat(randomInt(0, rows)))
+    return NSPoint(x: CGFloat(randomInt(0, cols - 1)), y: CGFloat(randomInt(0, rows - 1)))
   }
 
   /* ------------------------------
    * Generate random offsets
    * ------------------------------ */
   private func randomOffset() -> NSPoint {
-    return NSPoint(x: CGFloat(randomInt(0, Int(starCellWidth))), y: CGFloat(randomInt(0, Int(starCellHeight))))
+    return NSPoint(x: CGFloat(randomInt(0, Int(starCellWidth) - 1)), y: CGFloat(randomInt(0, Int(starCellHeight) - 1)))
   }
 
   /* ------------------------------
@@ -298,6 +285,7 @@ final class StarSaverView: ScreenSaverView {
     super.startAnimation()
 
     loadPreferences()
+    resetStars()
 
     // A fresh start means the host process is alive and reusing this view;
     // cancel any pending safety-net exit from a previous stop.
@@ -375,7 +363,7 @@ final class StarSaverView: ScreenSaverView {
     case .normal:
       newState = .exploding
     case .exploding:
-      newState = randomInt(0, novaProbability) == 0 ? .novaState1 : .gone
+      newState = randomInt(0, novaProbability - 1) == 0 ? .novaState1 : .gone
     case .novaState1:
       newState = .novaState2
     case .novaState2:
@@ -537,9 +525,8 @@ final class StarSaverView: ScreenSaverView {
 }
 
 /* ------------------------------
- * Random int in `[min, max]`, matching the range semantics of the
- * Objective-C `SSRandomIntBetween` this ported from.
+ * Random int in `[min, max]`, using the automatically seeded system generator.
  * ------------------------------ */
 private func randomInt(_ minValue: Int, _ maxValue: Int) -> Int {
-  return Int(SSRandomIntBetween(Int32(minValue), Int32(maxValue)))
+  return Int.random(in: minValue...maxValue)
 }
